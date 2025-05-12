@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta de San Valentín</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Sacramento');
+
+    /* Estilos base */
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Sacramento', cursive;
+      background-color: #f1e3d3;
+      margin: 0;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    #card {
+      width: 90%;
+      max-width: 800px;
+      margin: 2em auto;
+      position: relative;
+      display: flex;
+      visibility: hidden;
+      flex-wrap: wrap;
+    }
+
+    #card h2 {
+      font-size: 2.5em;
+      margin: 0;
+      color: pink;
+      text-align: center;
+    }
+
+    #card p {
+      font-size: 1.2em;
+      text-align: justify;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+
+    .side {
+      background: #eee;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .side.one {
+      flex: 1;
+      min-width: 250px;
+      transform: skew(10deg,20deg);
+      background: linear-gradient(90deg, #fff, #fff 40%, #ddd);
+    }
+
+    .side.two {
+      flex: 2;
+      min-width: 300px;
+      transform: skew(10deg,-15deg);
+      background: linear-gradient(-90deg, #fff, #fff 40%, #f0f0f0);
+    }
+
+    .valentines-day {
+      position: relative;
+      cursor: pointer;
+      transform: scale(0.8);
+    }
+
+    /* Media queries para dispositivos móviles */
+    @media (max-width: 768px) {
+      #card {
+        width: 95%;
+        margin: 1em auto;
+        flex-direction: column;
+      }
+
+      .side {
+        width: 100% !important;
+        transform: none !important;
+        min-width: auto !important;
+      }
+
+      .side.one {
+        display: none;
+      }
+
+      #card h2 {
+        font-size: 2em;
+      }
+
+      #card p {
+        font-size: 1em;
+        padding: 0 15px;
+      }
+
+      .valentines-day {
+        transform: scale(0.6);
+      }
+
+      .envelope:before,
+      .envelope:after {
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .valentines-day {
+        transform: scale(0.5);
+      }
+
+      #card h2 {
+        font-size: 1.8em;
+      }
+    }
+
+    /* Resto de tus estilos originales */
+    .envelope {
+      position: relative;
+      filter: drop-shadow(0 0 25px rgba(0,0,0,.3));
+    }
+
+    .envelope:before {
+      content: "";
+      position: absolute;
+      width: 254px;
+      height: 254px;
+      background-color: #ff9494;
+      transform: rotate(-45deg);
+      border-radius: 0 15px 0 0;
+      left: -37px;
+      top: -82px;
+    }
+
+    .envelope:after {
+      content: "";
+      position: absolute;
+      background-color: #ff9494;
+      width: 360px;
+      height: 225px;
+      left: -90px;
+      top: 45px;
+    }
+
+    .heart {
+      position: relative;
+      background-color: #e01911;
+      display: inline-block;
+      height: 180px;
+      top: 50px;
+      left: 0;
+      transform: rotate(-45deg);
+      width: 180px;
+      filter: drop-shadow(0 -10px 25px rgba(0,0,0,.3));
+      transition: .5s;
+    }
+
+    .heart:before,
+    .heart:after {
+      content: "";
+      background-color: #e01911;
+      border-radius: 50%;
+      height: 180px;
+      width: 180px;
+      position: absolute;
+    }
+
+    .heart:before {
+      top: -100px;
+      left: 0;
+    }
+
+    .heart:after {
+      left: 100px;
+      top: 0;
+    }
+
+    .front {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-right: 190px solid #fbd2d2;
+      border-top: 113px solid transparent;
+      border-bottom: 113px solid transparent;
+      top: 44px;
+      left: 80px;
+      z-index: 4;
+    }
+
+    .front:before {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 190px solid #fbd2d2;
+      border-top: 113px solid transparent;
+      border-bottom: 113px solid transparent;
+      top: -113px;
+      left: -170px;
+    }
+
+    .front:after {
+      width: 0;
+      height: 0;
+      position: absolute;
+      content: "";
+      border-bottom: 150px solid #fce7e9;
+      border-right: 180px solid transparent;
+      border-left: 180px solid transparent;
+      top: -36px;
+      left: -170px;
+    }
+
+    .text {
+      position: absolute;
+      font-family: arial;
+      letter-spacing: 5px;
+      text-align: center;
+      color: white;
+      z-index: 2;
+      top: 80px;
+      left: 15px;
+      transition: .5s;
+      font-size: 1.5em;
+    }
+
+    .valentines-day:hover .heart {
+      transform: translateY(-50px) rotate(-45deg);
+    }
+
+    .valentines-day:hover .text {
+      transform: translateY(-50px);
+    }
+  </style>
+</head>
+<body>
+  <div class="valentines-day">
+    <div class="envelope"></div>
+    <div class="heart"></div>
+    <div class="text"> PARA: <br> My Love </div>
+    <div class="front"></div>
+  </div>
+
+  <div id="card">
+    <div class="side one"></div>
+    <div class="side two">
+      <h2>Para mi bellatrix</h2>
+      <p>Querida Ximenita... </p>
+      <p>Hola hermosa, me he dado cuenta de que antes de que te conociera, no sabia lo que era estar
+        enamorado y ahora pienso en ti cada minuto que pasa, hasta que por fin jugamos juntos o platicamos
+        y aunque sé que tú y yo diferimos en muchas cosas también tenemos muchas en común.
+        Solo espero que esta pequeña carta te guste y quería decirte que eres muy hermosa y que me gustas...</p>
+      <p>Quisiera y deseo que algún día se lograra esto que siento... te quiere: Jonny</p>
+    </div>
+  </div>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+  <script>
+    $(document).ready(function(){
+      $('.valentines-day').click(function(){
+        $('.envelope').css({'animation':'fall 3s linear 1', '-webkit-animation':'fall 3s linear 1'});
+        $('.envelope').fadeOut(800, function() {
+          $('.valentines-day .heart, .valentines-day .text, .valentines-day .front').hide();
+          $('#card').css({'visibility':'visible', 'opacity': 0, 'transform': 'scale(0.1)'});
+          $('#card').animate({'opacity': 1}, {
+            duration: 1000,
+            step: function(now, fx) {
+              var scale = 1 + Math.sin(now * Math.PI) * 0.1;
+              $(this).css('transform', 'scale(' + scale + ')');
+            }
+          });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
